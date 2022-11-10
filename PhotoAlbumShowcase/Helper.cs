@@ -40,7 +40,7 @@ namespace PhotoAlbumShowcase
             // allows loose formatting of argument label:
             // double prefix, single prefix, or no prefix
             var listOfArgs = args.ToList().Select(
-                a => string.IsNullOrWhiteSpace(a) ? a : a.Replace("-", ""));
+                a => string.IsNullOrWhiteSpace(a) ? a : a.TrimStart('-'));
 
             if (listOfArgs.All(a => string.IsNullOrWhiteSpace(a)))
             {
@@ -64,7 +64,7 @@ namespace PhotoAlbumShowcase
             // a more robust solution would be to look for multiple arguments of
             // album={int} on the command line
 
-            var regex = new Regex(@"/album/i=[0-9]+");
+            var regex = new Regex(@"album=[0-9]+$", RegexOptions.IgnoreCase);
             var albums = listOfArgs.Where(a => regex.IsMatch(a));
 
             if (albums == null || !albums.Any())
@@ -81,7 +81,7 @@ namespace PhotoAlbumShowcase
             {
                 ManPage.WriteManPage();
 
-                return (int)ErrCodes.HELPED;
+                return (int)ErrCodes.INVALID_ALBUM_ID;
             }
 
             return albumId;

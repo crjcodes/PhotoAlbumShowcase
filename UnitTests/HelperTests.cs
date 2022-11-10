@@ -2,9 +2,9 @@
 
 namespace UnitTests
 {
-    public class ArgsHelperTests
+    public class HelperTests
     {
-        public ArgsHelperTests()
+        public HelperTests()
         {
         }
 
@@ -64,13 +64,16 @@ namespace UnitTests
 
         #endregion
 
-        [Fact(Skip = "TODO")]
+        [Fact]
         public void ProcessArgs_HelpArg()
         {
+            var args = new string[1] { "--help" };
+            var result = Helper.ProcessArgs(args);
 
+            result.ShouldBe((int)ErrCodes.HELPED);
         }
 
-        [Theory(Skip = "TODO")]
+        [Theory]
         [InlineData("--help")]
         [InlineData("-help")]
         [InlineData("help")]
@@ -78,18 +81,15 @@ namespace UnitTests
         [InlineData("--Help")]
         public void ProcessArgs_ArgDashDoesNotMatter_StillWorks(string arg)
         {
-
+            var result = Helper.ProcessArgs(new string[1] { arg });
+            result.ShouldBe((int)ErrCodes.HELPED);
         }
 
-        [Theory(Skip = "TODO")]
-        [InlineData("")]
-        [InlineData("--")]
-        [InlineData("help")]
-        [InlineData("HELP")]
-        [InlineData("--Help")]
-        public void ProcessArgs_ArgNotMatchForAlbum(string arg)
+        [Fact]
+        public void ProcessArgs_WhenValidArg_ShouldContinue()
         {
-
+            var result = Helper.ProcessArgs(new string[1] { "--album=1" });
+            result.ShouldBe(1);
         }
     }
 }

@@ -23,11 +23,15 @@ else if (processArgsResult < 0)
 
 // CALL THE "API"
 
-var result = AlbumClient.Get(processArgsResult);
+var result = await AlbumClient.Get(processArgsResult);
 
 // PRESENT THE RESULTS
 
-AlbumFormatter.WriteAlbum(result);
+foreach (var album in result)
+{
+    var line = string.Format("[{0}] {1}", album.Id, album.Title);
+    Console.WriteLine(line);
+}
 
 
 

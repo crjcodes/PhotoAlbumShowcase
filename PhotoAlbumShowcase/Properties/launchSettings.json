@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PhotoAlbumShowcase": {
+      "commandName": "Project",
+      "commandLineArgs": "--album=3"
+    }
+  }
+}
