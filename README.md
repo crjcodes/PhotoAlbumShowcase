@@ -25,6 +25,6 @@ Command-line operation is best.  Examples via Bash for Windows.
 
 ## Testing
 
-Basic unit testing is included suitable for a poc showcase is included.
+Basic unit testing is included, suitable for a simple showcase.
 
 ![Running](TestShot.png)
